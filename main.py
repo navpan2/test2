@@ -8,6 +8,7 @@ import time
 
 app = FastAPI()
 
+
 def install_and_start_tor():
     try:
         # Run apt-get update
