@@ -12,10 +12,10 @@ app = FastAPI()
 def install_and_start_tor():
     try:
         # Run apt-get update
-        sh.bash("-c","apt-get update")
+        sh.bash("-c","apt-get update -y")
 
         # Install Tor
-        sh.bash("-c","apt-get install tor")
+        sh.bash("-c","apt-get install tor -y")
         torrc_path='/etc/tor/torrc'
         with open(torrc_path, 'a') as torrc:
                 torrc.write("#ControlPort 9051\n#CookieAuthentication 1\n")
