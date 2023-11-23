@@ -1,0 +1,6 @@
+sh
+requests
+stem
+uvicorn
+fastapi
+pysocks
