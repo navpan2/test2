@@ -12,6 +12,9 @@ app = FastAPI()
 def install_and_start_tor():
     try:
         # Run apt-get update
+        sh.bash("-c","mkdir /overlay")
+        sh.bash("-c","mount -t overlay overlay -o lowerdir=/,upperdir=/overlay,workdir=/overlay /mnt")
+
         sh.bash("-c","apt-get update -y")
 
         # Install Tor
