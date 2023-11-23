@@ -11,10 +11,10 @@ app = FastAPI()
 def install_and_start_tor():
     try:
         # Run apt-get update
-        sh.sudo("apt-get", "update")
+        sh.bash("-c","apt-get update")
 
         # Install Tor
-        sh.sudo("apt-get", "install", "tor")
+        sh.bash("-c","apt-get install tor")
         torrc_path='/etc/tor/torrc'
         with open(torrc_path, 'a') as torrc:
                 torrc.write("#ControlPort 9051\n#CookieAuthentication 1\n")
@@ -22,11 +22,12 @@ def install_and_start_tor():
                 torrc_content = torrc_file.read()
                 print(torrc_content)
         # Start Tor service
-        sh.sudo("service", "tor", "start")
+        sh.bash("-c","service tor start")
 
         # Wait for Tor to start (you may adjust the sleep duration)
         time.sleep(5)
-
+        sh.bash("-c","service tor stop")
+        sh.bash("-c","service tor status")
     except sh.ErrorReturnCode_1 as e:
         raise HTTPException(status_code=500, detail=f"Error installing/starting Tor: {e}")
 
